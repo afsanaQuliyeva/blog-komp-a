@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\homeController;
@@ -22,9 +23,18 @@ Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::group(['middleware' =>['auth:sanctum', 'verified'] ], function(){
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('categories/trash', [CategoryController::class, 'showTrash'])->name('categories.trash');
+    Route::resource('categories', CategoryController::class);
+    Route::get('categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
+    Route::get('categories/restore/{id}', [CategoryController::class, 'restore'])->name('categories.restore');
+    Route::resource('articles', ArticleController::class);
+});
 
 
-Route::resource('categories', CategoryController::class);
+
+

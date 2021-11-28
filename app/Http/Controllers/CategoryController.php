@@ -108,6 +108,32 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $success = Category::onlyTrashed()->find($id)->forceDelete();
+        if($success)
+        {
+            return Redirect::route('categories.trash');
+        }
+    }
+
+    public function delete($id){
+        $success = Category::find($id)->delete();
+        if($success)
+        {
+            return Redirect::route('categories.index');
+        }
+    }
+
+    public function showTrash() {
+        $categories = Category::onlyTrashed()->get();
+        return view('admin.categories.trash', compact('categories'));
+    }
+
+
+    public function restore($id) {
+        $success = Category::onlyTrashed()->find($id)->restore();
+        if($success)
+        {
+            return Redirect::route('categories.index');
+        }
     }
 }

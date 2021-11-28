@@ -24,6 +24,7 @@
             <div class="container-fluid">
                 <div class="mb-3">
                     <a href="{{route('categories.create')}}" class="btn btn-warning">Add category</a>
+                    <a href="{{route('categories.trash')}}" class="btn btn-info">Trash</a>
                 </div>
                         <div class="card">
                             <div class="card-header">
@@ -58,6 +59,7 @@
                                         </td>
                                         <td>
                                             <a href="{{route('categories.edit', $category->id)}}" class="btn btn-info">Edit</a>
+                                            <a href="{{route('categories.delete', $category->id)}}" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
