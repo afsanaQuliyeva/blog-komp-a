@@ -37,23 +37,24 @@
                             <tr>
                                 <th>No</th>
                                 <th>Başlıq</th>
+                                <th>Slug</th>
                                 <th>Açıqlama</th>
                                 <th>Foto</th>
                                 <th>Əməliyyatlar</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @php($no = 1)
                             @foreach($articles as $article)
                                 <tr>
-                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $articles->firstItem() + $loop->index  }}</td>
                                     <td>{{$article->title}}</td>
+                                    <td>{{$article->slug}}</td>
                                     <td>{{$article->desc}}</td>
                                     <td>
-                                        <img src="{{$article->image}}" alt="">
+                                        <img src="{{asset('uploads/'.$article->image)}}" alt="" width="200">
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-info">Edit</a>
+                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn-info">Edit</a>
                                         <a href="" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
@@ -69,6 +70,9 @@
                             </tr>
                             </tfoot>
                         </table>
+                        <div class="mt-4">
+                            {{$articles->links()}}
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

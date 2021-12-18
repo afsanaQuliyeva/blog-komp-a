@@ -24,11 +24,12 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|min:5',
             'desc' =>'required',
             'content' => 'required',
-            'slug' => 'required|unique:articles',
-            'image' => 'image|mimes:jpg,jpeg,png|max:10000'
+//            'slug' => 'required|unique:articles',
+            'image' => 'image|mimes:jpg,jpeg,png|max:10000',
+            'categories' => 'required',
         ];
     }
 }

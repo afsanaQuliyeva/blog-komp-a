@@ -30,7 +30,7 @@
                                 <label for="title" class="form-label">Başlıq</label>
                                 <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
                                 @error('title')
-                                <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -47,21 +47,19 @@
                                  <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-                                <label for="slug" class="form-label">Slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}">
-                                @error('slug')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                             <div class="mb-3">
                                 <label for="category" class="form-label">Kateqoriya</label>
                                 <select name="categories[]" id="category" class="form-control" multiple>
                                     @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                      <option value="{{$category->id}}"
+                                      {{is_array(old('categories')) && in_array($category->id, old('categories')) ? 'selected' : ''}}
+                                      >
+                                          {{$category->category_name}}
+                                      </option>
                                     @endforeach
                                 </select>
-                                @error('kateqoriya')
+                                @error('categories')
                                      <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
